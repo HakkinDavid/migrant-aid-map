@@ -20,7 +20,7 @@
 
         markers.forEach(m => {
             m.element = leaflet.marker(m.geo).addTo(map);
-            m.element.bindPopup(m.name).openPopup();
+            m.element.bindPopup(m.name);
         });
     }
 
