@@ -39,12 +39,12 @@
 
 
 <main>
-    <div bind:this={mapElement}></div>
+    <div class="z-0" bind:this={mapElement}></div>
 </main>
 
 <style>
     @import 'leaflet/dist/leaflet.css';
     main div {
-        height: 800px;
+        height: 100vh;
     }
 </style>

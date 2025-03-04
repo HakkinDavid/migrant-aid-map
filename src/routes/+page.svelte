@@ -17,8 +17,6 @@
     }
 </script>
 
-<h1>BIENVENIDO, AMIGO(A)</h1>
-
 {#await getMarkers()}
     <div>
         Cargando ...
@@ -28,6 +26,15 @@
 {/await}
 
 <!-- svelte-ignore a11y_consider_explicit_label -->
-<button on:click={
-    () => {showHousing = !showHousing}
-}>{#if showHousing} ocultar casas {:else} mostrar casas {/if}</button>
+<button class="absolute bottom-12 right-12 rounded-lg bg-{showHousing ? 'red' : 'green'}-300 px-2 py-2"
+    on:click=
+        {
+            () => {showHousing = !showHousing}
+        }
+>
+    {#if showHousing}
+        Ocultar alojamiento
+    {:else}
+        Mostrar alojamiento
+    {/if}
+</button>
