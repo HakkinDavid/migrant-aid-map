@@ -1,29 +1,40 @@
 <script>
-    import { onMount, onDestroy } from 'svelte';
+    import { onMount, onDestroy, afterUpdate } from 'svelte';
+
+    export let markers = [];
 
     let mapElement;
     let map;
 
-    onMount(async () => {
+    async function buildMap () {
         const leaflet = await import('leaflet');
 
-        let map = L.map('map').setView([32.522499, -117.046623], 13);
+        await removeMap();
+
+        map = leaflet.map(mapElement).setView([32.522499, -117.046623], 13);
     
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-    
-        let marker = L.marker([32.522813, -117.001688]).addTo(map);
-        marker.bindPopup("Casa del Migrante en Tijuana, AC").openPopup();
-    });
 
-    onDestroy(async () => {
-        if(map) {
-            console.log('Unloading Leaflet map.');
+        markers.forEach(m => {
+            m.element = leaflet.marker(m.geo).addTo(map);
+            m.element.bindPopup(m.name).openPopup();
+        });
+    }
+
+    async function removeMap () {
+        if (map) {
             map.remove();
         }
-    });
+    }
+
+    onMount(buildMap);
+
+    afterUpdate(buildMap);
+
+    onDestroy(removeMap);
 </script>
 
 
