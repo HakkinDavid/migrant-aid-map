@@ -11,10 +11,21 @@
 
         await removeMap();
 
-        map = leaflet.map(mapElement).setView([32.522499, -117.046623], 13);
+        map = leaflet.map(mapElement, {
+            center: [32.52, -117.02],
+            zoom: 10.33,
+            maxBounds: [
+                [32.532838, -117.134573],
+                [32.571187, -116.688688],
+                [32.184594, -116.683403],
+                [32.280616, -116.524034]
+            ],
+            maxBoundsViscosity: 1.0
+        }).setView([32.522499, -117.046623], 13);
     
         leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
+            minZoom: 11,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
