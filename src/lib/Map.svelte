@@ -28,7 +28,7 @@
                 [32.280616, -116.524034]
             ],
             maxBoundsViscosity: 1.0
-        }).setView(TIJUANA_CENTER);
+        });
     
         leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -46,12 +46,13 @@
     }
 
     async function removeMap () {
-        if (map) {
-            map.remove();
-        }
         if (posWatcher) {
             const { Geolocation } = await import('@capacitor/geolocation');
             Geolocation.clearWatch({id: posWatcher});
+        }
+        if (map) {
+            map.removeLayer(positionMarker);
+            map.remove();
         }
         positionMarker = undefined;
         dotIcon = undefined;
