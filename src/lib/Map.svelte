@@ -10,6 +10,7 @@
     let mapElement;
     let map;
     let dotIcon;
+    let houseIcon;
     let posWatcher;
 
     async function buildMap () {
@@ -36,11 +37,15 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        await addMarkers();
+        if (!houseIcon) {
+            houseIcon = leaflet.icon({iconUrl: '/house.png', iconSize: [50,50]});
+        }
 
         if (!dotIcon) {
             dotIcon = leaflet.icon({iconUrl: '/dot.png', iconSize: [50,50]});
         }
+
+        await addMarkers();
         
         posWatcher = await Geolocation.watchPosition({}, updatePositionMarker);
     }
@@ -63,7 +68,7 @@
         if (map) {
             const leaflet = await import('leaflet');
             markers.forEach(m => {
-                m_id.push(leaflet.marker(m.geo).addTo(map).bindPopup(m.name));
+                m_id.push(leaflet.marker(m.geo, {icon: houseIcon}).addTo(map).bindPopup(m.name));
             });
         }
     }
