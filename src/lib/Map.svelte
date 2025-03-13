@@ -31,10 +31,11 @@
             maxBoundsViscosity: 1.0
         });
     
-        leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+        leaflet.tileLayer('/tiles/{z}/{x}/{y}.png', {
+            maxZoom: 15,
             minZoom: 11,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            errorTileUrl: '/tiles/miss.png'
         }).addTo(map);
 
         if (!houseIcon) {
