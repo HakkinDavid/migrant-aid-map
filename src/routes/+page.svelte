@@ -5,6 +5,7 @@
     const filters = {
         housing: true
     };
+    let showFilters = false;
 
     async function getMarkers () {
         let finalLocations = {};
@@ -33,19 +34,28 @@
     <Map markers={L} />
 {/await}
 
-<!-- svelte-ignore a11y_consider_explicit_label -->
-<button
-    class="absolute bottom-12 right-12 rounded-lg px-2 py-2"
-    class:bg-red-300={filters.housing}
-    class:bg-green-300={!filters.housing}
-    on:click=
-        {
-            () => {filters.housing = !filters.housing}
-        }
->
-    {#if filters.housing}
-        Ocultar alojamiento
-    {:else}
-        Mostrar alojamiento
-    {/if}
-</button>
+ <div class="absolute bottom-6 right-4 min-w-2xs rounded-xl px-2 py-2 pb-4 bg-gray-200 shadow-md">
+    <button
+        class="w-full cursor-pointer"
+        on:click=
+            {
+                () => {showFilters = !showFilters}
+            }
+    >
+        <p class="text-center">Filtros</p>
+    </button>
+    <div class="w-7/8 mx-auto mt-2" hidden={!showFilters}>
+        <!-- for filter in filters -->
+        <div class="flex items-center">
+            <input
+                type="checkbox"
+                bind:checked={filters.housing}
+                id="showHousing"
+                class="form-checkbox h-5 w-5 text-blue-500 border-none focus:ring-transparent focus:ring-offset-0 bg-gray-50 rounded-xs"
+            />
+            <label for="showHousing" class="ml-2 pb-0.5 text-sm hover:cursor-pointer">    
+                Mostrar alojamiento
+            </label>
+        </div>
+    </div>
+</div>

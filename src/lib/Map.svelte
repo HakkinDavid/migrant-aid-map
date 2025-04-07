@@ -39,7 +39,8 @@
         }).addTo(map);
 
         if (!houseIcon) {
-            houseIcon = leaflet.icon({iconUrl: '/house.png', iconSize: [50,50]});
+            // if screen size etc etc size can change for visual clarity
+            houseIcon = leaflet.icon({iconUrl: '/house.png', iconSize: [30,30]});
         }
 
         if (!dotIcon) {
