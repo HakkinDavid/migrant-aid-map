@@ -34,7 +34,7 @@
     <Map markers={L} />
 {/await}
 
- <div class="absolute bottom-6 right-4 min-w-2xs rounded-xl px-2 py-2 pb-4 bg-gray-200 shadow-md">
+ <div class="absolute bottom-6 right-4 min-w-2xs rounded-xl px-2 py-2 pb-2 bg-gray-200 shadow-md">
     <button
         class="w-full cursor-pointer"
         onclick=
