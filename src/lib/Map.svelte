@@ -21,7 +21,7 @@
 
         map = leaflet.map(mapElement, {
             center: TIJUANA_CENTER,
-            zoom: 10.33,
+            zoom: 12,
             maxBounds: [
                 [32.532838, -117.134573],
                 [32.571187, -116.688688],
@@ -33,7 +33,7 @@
     
         leaflet.tileLayer('/tiles/{z}/{x}/{y}.png', {
             maxZoom: 15,
-            minZoom: 11,
+            minZoom: 12,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             errorTileUrl: '/tiles/miss.png'
         }).addTo(map);
