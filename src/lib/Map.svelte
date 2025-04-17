@@ -1,5 +1,6 @@
 <script>
     import { onMount, onDestroy, afterUpdate } from 'svelte';
+    import { services } from '$lib/PoI.svelte';
 
     const TIJUANA_CENTER = [32.522499, -117.046623];
     
@@ -11,7 +12,16 @@
     let map;
     let dotIcon;
     let houseIcon;
+    let icons = {};
     let posWatcher;
+
+    let typeByLocationName = {};
+
+    for (const [type, names] of Object.entries(services)) {
+        names.forEach(name => {
+            typeByLocationName[name] = type;
+        });
+    }
 
     async function buildMap () {
         const leaflet = await import('leaflet');
@@ -43,6 +53,13 @@
             houseIcon = leaflet.icon({iconUrl: '/house.png', iconSize: [30,30]});
         }
 
+        icons = {
+            housing: leaflet.icon({ iconUrl: '/house.png', iconSize: [30, 30] }),
+            feeding: leaflet.icon({ iconUrl: '/food.png', iconSize: [30, 30] }),
+            consulate: leaflet.icon({ iconUrl: '/consulate.png', iconSize: [30, 30] }),
+            humanRights: leaflet.icon({ iconUrl: '/rights.png', iconSize: [30, 30] })
+        };
+
         if (!dotIcon) {
             dotIcon = leaflet.icon({iconUrl: '/dot.png', iconSize: [50,50]});
         }
@@ -70,7 +87,10 @@
         if (map) {
             const leaflet = await import('leaflet');
             markers.forEach(m => {
-                m_id.push(leaflet.marker(m.geo, {icon: houseIcon}).addTo(map).bindPopup(m.name));
+                const type = typeByLocationName[m.key];
+                const icon = icons[type] || icons.housing;
+                const marker = leaflet.marker(m.geo, { icon }).addTo(map).bindPopup(m.name);
+                m_id.push(marker);
             });
         }
     }

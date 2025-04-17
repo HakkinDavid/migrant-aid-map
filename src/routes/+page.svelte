@@ -21,15 +21,20 @@
         let finalLocations = {};
         for (let f in filters) {
             if (filters[f]) {
-                services[f].forEach((element) => {
-                    if (!finalLocations[element]) {
-                        finalLocations[element] = locations[element];
+                services[f].forEach((key) => {
+                    if (!finalLocations[key]) {
+                        // Guardamos tanto el objeto como su key
+                        finalLocations[key] = {
+                            ...locations[key],
+                            key // esta es la clave que usaremos después
+                        };
                     };
                 });
             }
         }
         return Object.values(finalLocations);
     }
+
 </script>
 
 <svelte:head>
