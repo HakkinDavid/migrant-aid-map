@@ -17,16 +17,22 @@
         humanRights: "Derechos Humanos"
     }
 
+    let showAbout = $state(false);
+
+    function toggleAbout() {
+        showAbout = !showAbout;
+        console.log("Cambiado");
+    }
+
     async function getMarkers () {
         let finalLocations = {};
         for (let f in filters) {
             if (filters[f]) {
                 services[f].forEach((key) => {
                     if (!finalLocations[key]) {
-                        // Guardamos tanto el objeto como su key
                         finalLocations[key] = {
                             ...locations[key],
-                            key // esta es la clave que usaremos después
+                            key
                         };
                     };
                 });
@@ -59,6 +65,7 @@
     >
         <p class="text-center align-middle">Filtros</p>
     </button>
+
     <div class="w-7/8 mx-auto mt-2 mb-1 space-y-0.5" hidden={!showFilters}>
         <!-- for filter in filters -->
          {#each Object.keys(filters) as f}
@@ -76,3 +83,36 @@
         {/each}
     </div>
 </div>
+
+<!-- Botón de información -->
+<div class="absolute top-4 right-4 z-[1000] pointer-events-auto">
+    <button
+        class="rounded-full bg-white shadow-md p-2 text-xl"
+        onclick={toggleAbout}
+        aria-label="Acerca del proyecto"
+    >
+        ℹ️
+    </button>
+</div>
+
+<!-- Modal de información -->
+{#if showAbout}
+    <div class="fixed inset-0 flex justify-center items-center z-[1000]" style="background-color: rgba(0,0,0,0.5)" onclick={toggleAbout}>
+        <div class="bg-white rounded-xl p-6 w-11/12 max-w-md shadow-lg" onclick={e => e.stopPropagation()}>
+            <h2 class="text-xl font-bold mb-4">Acerca del proyecto</h2>
+            <p class="text-gray-800 text-justify space-y-">
+                Este proyecto nació al observar una necesidad urgente en las calles de Tijuana: personas migrantes buscando ayuda, orientación y un lugar seguro. 
+                A partir de las necesidades observadas en Tijuana, surgió la idea de crear un mapa que no solo muestre ubicaciones, sino que muestre esfuerzos colectivos de la comunidad y conecte a las personas.
+                <br>
+                Esta herramienta ha sido construida con un enfoque comunitario, escuchando a quienes están migrando y colaborando con quienes ofrecen apoyo. 
+                Es un gesto de solidaridad digital, hecho para acompañar, guiar y recordar que nadie camina solo.
+            </p>
+            <button
+                class="mt-6 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                onclick={toggleAbout}
+            >
+                Cerrar
+            </button>
+        </div>
+    </div>
+{/if}

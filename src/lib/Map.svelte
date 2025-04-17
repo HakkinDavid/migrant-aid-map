@@ -14,6 +14,7 @@
     let houseIcon;
     let icons = {};
     let posWatcher;
+    let showAbout = false;
 
     let typeByLocationName = {};
 
@@ -121,6 +122,10 @@
     async function updateMap () {
         removeMarkers();
         await addMarkers();
+    }
+
+    function toggleAbout() {
+        showAbout = !showAbout;
     }
 
     onMount(buildMap);
