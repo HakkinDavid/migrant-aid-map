@@ -106,7 +106,16 @@
                 <br>
                 Esta herramienta ha sido construida con un enfoque comunitario, escuchando a quienes están migrando y colaborando con quienes ofrecen apoyo. 
                 Es un gesto de solidaridad digital, hecho para acompañar, guiar y recordar que nadie camina solo.
+                <br>
+                <br>
             </p>
+
+            <div class="mt-4 text-sm text-gray-700 leading-relaxed">
+                <strong>Referencias:</strong><br>
+                OIM. (2024). Seguimiento de flujos de población migrante. <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-05/dtm-q1-2024-tijuana.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a><br>
+                OIM. (2023). Directorio de servicios gratuitos para personas migrantes, refugiadas, desplazadas y retornadas en Tijuana. <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2023-12/ficha-de-servicios_tijuana_2023.10oim_acnur.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a><br>
+                OIM. (2023). Mapa de servicios para personas refugiadas y migrantes en Tijuana. <a href="https://help.unhcr.org/wp-content/uploads/sites/22/pdf/MapaTijuana.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a>
+            </div>
             <button
                 class="mt-6 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
                 onclick={toggleAbout}
