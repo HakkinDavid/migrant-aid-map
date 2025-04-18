@@ -91,7 +91,7 @@
             markers.forEach(m => {
                 const type = typeByLocationName[m.key];
                 const icon = icons[type] || icons.housing;
-                const marker = leaflet.marker(m.geo, { icon }).addTo(map).bindPopup(m.name);
+                const marker = leaflet.marker(m.geo, { icon }).addTo(map).bindPopup(m.name + (m.url && m.url.length > 0 ? "<br><a href=" + m.url + ">Más información</a>" : ""));
                 m_id.push(marker);
             });
         }

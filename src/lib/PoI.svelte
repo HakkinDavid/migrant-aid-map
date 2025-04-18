@@ -2,10 +2,12 @@
     class Location {
         name = "Ubicación";
         geo = [0.0,0.0];
+        url = ""
         
-        constructor (name, geo) {
+        constructor (name, geo, url) {
             this.name = name;
             this.geo = geo;
+            this.url = url || "";
         }
     };
 
