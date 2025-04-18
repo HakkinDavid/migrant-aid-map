@@ -22,9 +22,7 @@ jobs:
         run: npm ci
 
       - name: Build for GitHub Pages ⚒️
-        run: npm run build
-        env:
-          BASE_PATH: /migrant-aid-map
+        run: BASE_PATH=/migrant-aid-map npm run build
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
