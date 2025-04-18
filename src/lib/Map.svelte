@@ -1,6 +1,7 @@
 <script>
     import { onMount, onDestroy, afterUpdate } from 'svelte';
     import { services } from '$lib/PoI.svelte';
+    import { PUBLIC_BASE_PATH } from '$env/static/public';
 
     const TIJUANA_CENTER = [32.522499, -117.046623];
     
@@ -42,27 +43,27 @@
             maxBoundsViscosity: 1.0
         });
     
-        leaflet.tileLayer('/tiles/{z}/{x}/{y}.png', {
+        leaflet.tileLayer(PUBLIC_BASE_PATH + '/tiles/{z}/{x}/{y}.png', {
             maxZoom: 15,
             minZoom: 12,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            errorTileUrl: '/tiles/miss.png'
+            errorTileUrl: PUBLIC_BASE_PATH + '/tiles/miss.png'
         }).addTo(map);
 
         if (!houseIcon) {
             // if screen size etc etc size can change for visual clarity
-            houseIcon = leaflet.icon({iconUrl: '/house.png', iconSize: [30,30]});
+            houseIcon = leaflet.icon({iconUrl: PUBLIC_BASE_PATH + '/house.png', iconSize: [30,30]});
         }
 
         icons = {
-            housing: leaflet.icon({ iconUrl: '/house.png', iconSize: [30, 30] }),
-            feeding: leaflet.icon({ iconUrl: '/food.png', iconSize: [30, 30] }),
-            consulate: leaflet.icon({ iconUrl: '/consulate.png', iconSize: [30, 30] }),
-            humanRights: leaflet.icon({ iconUrl: '/rights.png', iconSize: [30, 30] })
+            housing: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/house.png', iconSize: [30, 30] }),
+            feeding: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/food.png', iconSize: [30, 30] }),
+            consulate: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/consulate.png', iconSize: [30, 30] }),
+            humanRights: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/rights.png', iconSize: [30, 30] })
         };
 
         if (!dotIcon) {
-            dotIcon = leaflet.icon({iconUrl: '/dot.png', iconSize: [50,50]});
+            dotIcon = leaflet.icon({iconUrl: PUBLIC_BASE_PATH + '/dot.png', iconSize: [50,50]});
         }
 
         await addMarkers();
