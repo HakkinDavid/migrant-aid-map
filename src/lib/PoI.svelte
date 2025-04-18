@@ -25,7 +25,7 @@
         ConsuladoElSalvador: new Location ("Consulado de la República de El Salvador en Tijuana", [32.521687, -117.013437]),
         ConsuladoHonduras: new Location ("Consulado General de Honduras en Tijuana", [32.520313, -117.012687]),
         ConsuladoGuatemala: new Location ("Consulado General de Guatemala en Tijuana", [32.524812, -117.014188]),
-        ConsuladoEstadosUnidos: new Location ("Consulado General de los Estados Unidos en Tijuana", [32.523313, -116.952438]),
+        ConsuladoEstadosUnidos: new Location ("Consulado General de los Estados Unidos en Tijuana", [32.523313, -116.952438], "https://mx.usembassy.gov/es/visas-es/u-s-embassy-mexico-city-es/u-s-consulate-general-tijuana-es/"),
 
         CEDH: new Location("Comisión Estatal de los Derechos Humanos de Baja California en Tijuana", [32.504438, -116.951188]),
         CNDH: new Location("Comisión Nacional de los Derechos Humanos, Sede Regional Tijuana", [32.521687, -117.008562])
