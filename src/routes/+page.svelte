@@ -83,7 +83,7 @@
                 () => {showFilters = !showFilters}
             }
     >
-        <p class="text-center align-middle">Filtros</p>
+        <p class="text-center align-middle font-semibold">Filtros</p>
     </button>
 
     <div class="w-7/8 mx-auto mt-2 mb-1 space-y-0.5" hidden={!showFilters}>
@@ -94,7 +94,7 @@
                 type="checkbox"
                 bind:checked={filters[f]}
                 id="{f}"
-                class="form-checkbox h-5 w-5 text-blue-500 border-none focus:ring-transparent focus:ring-offset-0 bg-gray-50 rounded-xs"
+                class="form-checkbox h-5 w-5 text-blue-500 border-none focus:ring-transparent focus:ring-offset-0 bg-gray-50 rounded-xs cursor-pointer"
             />
             <label for="{f}" class="ml-2 pb-0.5 text-sm hover:cursor-pointer">    
                 {labels[f]}
@@ -107,7 +107,7 @@
 <!-- Botón de información -->
 <div class="absolute top-4 right-4 z-[1000] pointer-events-auto">
     <button
-        class="rounded-full bg-white shadow-md p-2 text-xl"
+        class="rounded-full bg-white shadow-md p-2 text-xl cursor-pointer"
         onclick={toggleAbout}
         aria-label="Acerca del proyecto"
     >
@@ -117,6 +117,8 @@
 
 <!-- Modal de información -->
 {#if showAbout}
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div class="fixed inset-0 flex justify-center items-center z-[1000]" style="background-color: rgba(0,0,0,0.5)" onclick={toggleAbout}>
         <div class="bg-white rounded-xl p-6 w-11/12 max-w-md shadow-lg" onclick={e => e.stopPropagation()}>
             <h2 class="text-xl font-bold mb-4">Acerca del proyecto</h2>
