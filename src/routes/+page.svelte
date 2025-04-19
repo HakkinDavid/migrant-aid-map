@@ -6,7 +6,17 @@
         housing: true,
         feeding: true,
         consulate: true,
-        humanRights: true
+        humanRights: true,
+        public: true,
+        justice: true,
+        lgbti: true,
+        women: true,
+        children: true,
+        health: true,
+        international: true,
+        education: true,
+        orientation: true,
+        transport: true
     });
     let showFilters = $state(false);
 
@@ -14,7 +24,17 @@
         housing: "Albergues",
         feeding: "Alimentación",
         consulate: "Consulados",
-        humanRights: "Derechos Humanos"
+        humanRights: "Derechos Humanos",
+        public: "Instituciones Públicas",
+        justice: "Justicia",
+        lgbti: "LGBTI",
+        women: "Mujeres",
+        children: "Niñez y Juventud",
+        health: "Salud",
+        international: "Organismos Internacionales",
+        education: "Educación",
+        orientation: "Orientación y Apoyo",
+        transport: "Transporte"
     }
 
     let showAbout = $state(false);
