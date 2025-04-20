@@ -59,7 +59,17 @@
             housing: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/house.png', iconSize: [30, 30] }),
             feeding: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/food.png', iconSize: [30, 30] }),
             consulate: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/consulate.png', iconSize: [30, 30] }),
-            humanRights: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/rights.png', iconSize: [30, 30] })
+            humanRights: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/rights.png', iconSize: [30, 30] }),
+            public: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/public.png', iconSize: [30, 30] }),
+            justice: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/justice.png', iconSize: [30, 30] }),
+            lgbti: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/lgbti.png', iconSize: [30, 30] }),
+            women: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/women.png', iconSize: [30, 30] }),
+            children: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/children.png', iconSize: [30, 30] }),
+            health: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/health.png', iconSize: [30, 30] }),
+            international: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/international.png', iconSize: [30, 30] }),
+            education: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/education.png', iconSize: [30, 30] }),
+            orientation: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/orientation.png', iconSize: [30, 30] }),
+            transport: leaflet.icon({ iconUrl: PUBLIC_BASE_PATH + '/transport.png', iconSize: [30, 30] })
         };
 
         if (!dotIcon) {
