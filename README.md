@@ -1,38 +1,10 @@
-# sv
+# Sistema de apoyo migrante
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Este proyecto nació al observar una necesidad urgente en las calles de Tijuana: personas migrantes buscando ayuda, orientación y un lugar seguro. 
+A partir de las necesidades observadas en Tijuana, surgió la idea de crear un mapa que no solo muestre ubicaciones, sino que muestre esfuerzos colectivos de la comunidad y conecte a las personas.
+Esta herramienta ha sido construida con un enfoque comunitario, escuchando a quienes están migrando y colaborando con quienes ofrecen apoyo. 
+Es un gesto de solidaridad digital, hecho para acompañar, guiar y recordar que nadie camina solo.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+OIM. (2024). Seguimiento de flujos de población migrante. [Ver PDF](https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2024-05/dtm-q1-2024-tijuana.pdf)  
+OIM. (2023). Directorio de servicios gratuitos para personas migrantes, refugiadas, desplazadas y retornadas en Tijuana. [Ver PDF](https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2023-12/ficha-de-servicios_tijuana_2023.10oim_acnur.pdf)  
+OIM. (2023). Mapa de servicios para personas refugiadas y migrantes en Tijuana. [Ver PDF](https://help.unhcr.org/wp-content/uploads/sites/22/pdf/MapaTijuana.pdf)
