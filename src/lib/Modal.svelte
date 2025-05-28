@@ -25,12 +25,12 @@
                 </h2>
             {/if}
             {#if body}
-                <p class="text-gray-800 text-justify space-y-">
+                <p class="text-gray-800 text-sm lg:text-md text-justify space-y-">
                     {@render body()}
                 </p>
             {/if}
             {#if footer}
-                <div class="mt-4 text-sm text-gray-700 leading-relaxed">
+                <div class="mt-4 text-xs lg:text-sm text-gray-700 leading-relaxed">
                     {@render footer()}
                 </div>
             {/if}
