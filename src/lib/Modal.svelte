@@ -20,7 +20,7 @@
     <div class="fixed inset-0 flex justify-center items-center z-[1000]" style="background-color: rgba(0,0,0,0.5)" onclick={toggle}>
         <div class="bg-white rounded-xl p-6 w-11/12 max-w-md shadow-lg" onclick={e => e.stopPropagation()}>
             {#if header}
-                <h2 class="text-xl font-bold mb-4">
+                <h2 class="text-lg lg:text-xl font-bold mb-4">
                     {@render header()}
                 </h2>
             {/if}
