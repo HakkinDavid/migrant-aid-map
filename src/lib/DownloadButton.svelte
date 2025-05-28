@@ -1,5 +1,6 @@
 <script>
 	import { browser } from "$app/environment";
+	import Modal from "./Modal.svelte";
 
     let showDownload = $state(false);
     let showLinks = $state(false);
@@ -65,92 +66,74 @@
 </script>
 
 <button
-    class="rounded-full bg-green-500 shadow-md w-16 h-16 text-4xl cursor-pointer"
+    class="flex place-items-center place-content-center rounded-full bg-green-500 shadow-md w-16 h-16 text-4xl cursor-pointer"
     onclick={toggleDownload}
     aria-label="Descargar el mapa"
 >
-    ⬇️
+    <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
+        fill="#ffffff" viewBox="0 0 24 24" >
+        <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+        <path d="m21.8 6.4-2.7-3.6c-.38-.5-.97-.8-1.6-.8h-11c-.63 0-1.23.3-1.6.8L2.2 6.4h.01c-.13.18-.21.37-.21.6v13c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-.23-.09-.42-.21-.59h.01ZM6.5 4h11L19 6H5zM4 20V8h16v12z"></path><path d="M13 10h-2v4H8l4 4 4-4h-3z"></path>
+    </svg>
 </button>
 
 <!-- Modal de descarga -->
-{#if showDownload}
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div class="fixed inset-0 flex justify-center items-center z-[1000]" style="background-color: rgba(0,0,0,0.5)" onclick={toggleDownload}>
-        <div class="bg-white rounded-xl p-6 w-11/12 max-w-md shadow-lg" onclick={e => e.stopPropagation()}>
-            <h2 class="text-xl font-bold mb-4">Descarga el mapa como app</h2>
-            <p class="text-gray-800 text-justify space-y-">
-                La aplicación es ligera y simple, funciona sin conexión y te permitirá estar siempre ubicado.
-                <br>
-                Necesitamos fondos para pagar las licencias de Google y Apple. Usa los medios de contacto a continuación si estás en posibilidad de donar y apoyar este proyecto.
-                <br>
-            </p>
-
-            <div class="mt-4 text-sm text-gray-700 leading-relaxed">
-                <strong>Contacto para donaciones:</strong><br>
-                {#each emails as email}
-                    <a href="mailto:{email}" class="text-blue-600 underline" target="_blank">{email}</a><br>
-                {/each}
-            </div>
-            <div class="mt-6 flex flex-col flex-grow gap-2 place-content-end">
-                <button
-                    class="bg-blue-800 text-white w-full text-center py-2 rounded hover:bg-blue-700 cursor-pointer"
-                    onclick={toggleLinks}
-                >
-                    Descargar
-                </button>
-                <button
-                    class="bg-gray-800 text-white w-full text-center py-2 rounded hover:bg-gray-700 cursor-pointer"
-                    onclick={toggleDownload}
-                >
-                    Cerrar
-                </button>
-            </div>
-        </div>
-    </div>
-{/if}
+<Modal bind:active={showDownload}>
+    {#snippet header()}
+        Descarga el mapa como app
+    {/snippet}
+    {#snippet body()}
+        La aplicación es ligera y simple, funciona sin conexión y te permitirá estar siempre ubicado.
+        <br>
+        Necesitamos fondos para pagar las licencias de Google y Apple. Usa los medios de contacto a continuación si estás en posibilidad de donar y apoyar este proyecto.
+        <br>
+    {/snippet}
+    {#snippet footer()}
+        <strong>Contacto para donaciones:</strong><br>
+        {#each emails as email}
+            <a href="mailto:{email}" class="text-blue-600 underline" target="_blank">{email}</a><br>
+        {/each}
+    {/snippet}
+    {#snippet children()}
+        <button
+            class="bg-blue-800 text-white w-full text-center py-2 rounded hover:bg-blue-700 cursor-pointer"
+            onclick={toggleLinks}
+        >
+            Descargar
+        </button>
+    {/snippet}
+</Modal>
 
 <!-- Modal de enlaces -->
-{#if showLinks}
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div class="fixed inset-0 flex justify-center items-center z-[1000]" style="background-color: rgba(0,0,0,0.5)" onclick={toggleLinks}>
-        <div class="bg-white rounded-xl p-6 w-11/12 max-w-md shadow-lg" onclick={e => e.stopPropagation()}>
-            <h2 class="text-xl font-bold mb-4">¡Aún no podemos publicar en las tiendas oficiales!</h2>
-            <p class="text-gray-800 text-bold text-xl text-justify space-y-">
-                Solo necesitamos reunir 25 USD para publicar en Google Play Store (Android) y 100 USD para publicar en App Store (iOS).
-                <br>
-                El proyecto puede descargarse e instalarse de manera independiente en los siguientes botones.
-            </p>
-
-            <div class="mt-4 text-sm text-gray-700 leading-relaxed">
-                <strong>Contacto para donaciones:</strong><br>
-                {#each emails as email}
-                    <a href="mailto:{email}" class="text-blue-600 underline" target="_blank">{email}</a><br>
-                {/each}
-            </div>
-            <div class="mt-6 flex flex-col flex-grow gap-2 place-content-end">
-                <strong class="text-sm">Plataformas</strong>
-                {#each platforms as platform}
-                    <button
-                        class="flex place-items-center place-content-center gap-2 {platform.enabled} {platform.disabled} {platform.text} w-full text-center py-2 text-center align-middle rounded {platform.hover} cursor-pointer"
-                        onclick={() => download(platform.link)}
-                        disabled='{platform.is_disabled}'
-                    >
-                        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
-                            fill="{platform.fill}" viewBox="0 0 24 24" >
-                            <path d="{platform.icon}"></path>
-                        </svg>
-                        <span class="text-center align-middle h-full">{platform.name}</span>
-                    </button>
-                {/each}
-                <button
-                    class="bg-gray-800 text-white w-full text-center py-2 rounded hover:bg-gray-700 cursor-pointer"
-                    onclick={toggleLinks}
-                >
-                    Cerrar
-                </button>
-            </div>
-        </div>
-    </div>
-{/if}
+<Modal bind:active={showLinks}>
+    {#snippet header()}
+        ¡Aún no podemos publicar en las tiendas oficiales!
+    {/snippet}
+    {#snippet body()}
+        Solo necesitamos reunir 25 USD para publicar en Google Play Store (Android) y 100 USD para publicar en App Store (iOS).
+        <br>
+        El proyecto puede descargarse e instalarse de manera independiente en los siguientes botones.
+    {/snippet}
+    {#snippet footer()}
+        <strong>Contacto para donaciones:</strong><br>
+        {#each emails as email}
+            <a href="mailto:{email}" class="text-blue-600 underline" target="_blank">{email}</a><br>
+        {/each}
+    {/snippet}
+    {#snippet children()}
+        <strong class="text-sm">Plataformas</strong>
+        {#each platforms as platform}
+            <button
+                class="flex place-items-center place-content-center gap-2 {platform.enabled} {platform.disabled} {platform.text} w-full text-center py-2 text-center align-middle rounded {platform.hover} cursor-pointer"
+                onclick={() => download(platform.link)}
+                disabled='{platform.is_disabled}'
+            >
+                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+                    fill="{platform.fill}" viewBox="0 0 24 24" >
+                    <path d="{platform.icon}"></path>
+                </svg>
+                <span class="text-center align-middle h-full">{platform.name}</span>
+            </button>
+        {/each}
+    {/snippet}
+</Modal>
