@@ -2,9 +2,9 @@
     import { locations, services } from "$lib/PoI.svelte";
     import { Capacitor } from '@capacitor/core';
     import Map from "$lib/Map.svelte";
-    import DownloadButton from "$lib/DownloadButton.svelte";
 	import Modal from "$lib/Modal.svelte";
     import Button from "$lib/Button.svelte";
+	import DownloadMenu from "$lib/DownloadMenu.svelte";
 
     const filters = $state({
         housing: true,
@@ -147,8 +147,6 @@
 </Modal>
 
 {#if Capacitor.getPlatform() === 'web'}
-    <!-- Botón de descarga del app (si es web) -->
-    <div class="absolute top-24 right-4 pointer-events-auto">
-        <DownloadButton />
-    </div>
+    <!-- Menú de descarga del app (si es web) -->
+    <DownloadMenu />
 {/if}
