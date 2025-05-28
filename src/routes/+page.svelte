@@ -1,6 +1,8 @@
 <script>
     import { locations, services } from "$lib/PoI.svelte";
+    import { Capacitor } from '@capacitor/core';
     import Map from "$lib/Map.svelte";
+    import DownloadButton from "$lib/DownloadButton.svelte";
 
     const filters = $state({
         housing: true,
@@ -107,13 +109,20 @@
 <!-- Botón de información -->
 <div class="absolute top-4 right-4 z-[1000] pointer-events-auto">
     <button
-        class="rounded-full bg-white shadow-md p-2 text-xl cursor-pointer"
+        class="rounded-full bg-white shadow-md w-16 h-16 text-4xl cursor-pointer"
         onclick={toggleAbout}
         aria-label="Acerca del proyecto"
     >
         ℹ️
     </button>
 </div>
+
+{#if Capacitor.getPlatform() === 'web'}
+    <!-- Botón de descarga del app (si es web) -->
+    <div class="absolute top-24 right-4 z-[1000] pointer-events-auto">
+        <DownloadButton />
+    </div>
+{/if}
 
 <!-- Modal de información -->
 {#if showAbout}
@@ -138,12 +147,14 @@
                 OIM. (2023). Directorio de servicios gratuitos para personas migrantes, refugiadas, desplazadas y retornadas en Tijuana. <a href="https://mexico.iom.int/sites/g/files/tmzbdl1686/files/documents/2023-12/ficha-de-servicios_tijuana_2023.10oim_acnur.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a><br>
                 OIM. (2023). Mapa de servicios para personas refugiadas y migrantes en Tijuana. <a href="https://help.unhcr.org/wp-content/uploads/sites/22/pdf/MapaTijuana.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a>
             </div>
-            <button
-                class="mt-6 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
-                onclick={toggleAbout}
-            >
-                Cerrar
-            </button>
+            <div class="flex flex-grow place-content-end">
+                <button
+                    class="mt-6 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 cursor-pointer"
+                    onclick={toggleAbout}
+                >
+                    Cerrar
+                </button>
+            </div>
         </div>
     </div>
 {/if}
