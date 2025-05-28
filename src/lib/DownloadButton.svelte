@@ -1,6 +1,7 @@
 <script>
 	import { browser } from "$app/environment";
-	import Modal from "./Modal.svelte";
+	import Modal from "$lib/Modal.svelte";
+    import Button from "$lib/Button.svelte";
 
     let showDownload = $state(false);
     let showLinks = $state(false);
@@ -48,16 +49,6 @@
       }
     ];
 
-    function toggleDownload () {
-        showDownload = !showDownload;
-        console.log("Cambiando el estado del modal para descarga.");
-    }
-
-    function toggleLinks () {
-        showLinks = !showLinks;
-        console.log("Cambiando el estado del modal para enlaces.");
-    }
-
     function download (link) {
         if (browser) {
             window.open(link, "_blank");
@@ -65,17 +56,14 @@
     }
 </script>
 
-<button
-    class="flex place-items-center place-content-center rounded-full bg-green-500 shadow-md w-16 h-16 text-4xl cursor-pointer"
-    onclick={toggleDownload}
-    aria-label="Descargar el mapa"
->
-    <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
-        fill="#ffffff" viewBox="0 0 24 24" >
-        <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
-        <path d="m21.8 6.4-2.7-3.6c-.38-.5-.97-.8-1.6-.8h-11c-.63 0-1.23.3-1.6.8L2.2 6.4h.01c-.13.18-.21.37-.21.6v13c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-.23-.09-.42-.21-.59h.01ZM6.5 4h11L19 6H5zM4 20V8h16v12z"></path><path d="M13 10h-2v4H8l4 4 4-4h-3z"></path>
-    </svg>
-</button>
+<Button bind:value={showDownload} color="bg-green-500">
+    {#snippet icon()}
+        <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
+            fill="#ffffff" viewBox="0 0 24 24" >
+            <path d="m21.8 6.4-2.7-3.6c-.38-.5-.97-.8-1.6-.8h-11c-.63 0-1.23.3-1.6.8L2.2 6.4h.01c-.13.18-.21.37-.21.6v13c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-.23-.09-.42-.21-.59h.01ZM6.5 4h11L19 6H5zM4 20V8h16v12z"></path><path d="M13 10h-2v4H8l4 4 4-4h-3z"></path>
+        </svg>
+    {/snippet}
+</Button>
 
 <!-- Modal de descarga -->
 <Modal bind:active={showDownload}>
@@ -97,7 +85,9 @@
     {#snippet children()}
         <button
             class="bg-blue-800 text-white w-full text-center py-2 rounded hover:bg-blue-700 cursor-pointer"
-            onclick={toggleLinks}
+            onclick={
+                () => {showLinks = !showLinks}
+            }
         >
             Descargar
         </button>

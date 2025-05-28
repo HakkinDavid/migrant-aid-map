@@ -4,6 +4,7 @@
     import Map from "$lib/Map.svelte";
     import DownloadButton from "$lib/DownloadButton.svelte";
 	import Modal from "$lib/Modal.svelte";
+    import Button from "$lib/Button.svelte";
 
     const filters = $state({
         housing: true,
@@ -21,6 +22,7 @@
         orientation: true,
         transport: true
     });
+
     let showFilters = $state(false);
 
     const labels = {
@@ -41,11 +43,6 @@
     }
 
     let showAbout = $state(false);
-
-    function toggleAbout() {
-        showAbout = !showAbout;
-        console.log("Cambiado");
-    }
 
     async function getMarkers () {
         let finalLocations = {};
@@ -80,19 +77,15 @@
 
 <!-- Botón de filtros -->
  <div class="absolute bottom-6 right-4 pointer-events-auto">
-    <button
-        class="flex place-items-center place-content-center rounded-full bg-gray-500 shadow-md w-16 h-16 text-4xl cursor-pointer"
-        onclick=
-            {
-                () => {showFilters = !showFilters}
-            }
-    >
-        <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
-            fill="#ffffff" viewBox="0 0 24 24" >
-            <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
-            <path d="m12,2C6.49,2,2,6.49,2,12s4.49,10,10,10,10-4.49,10-10S17.51,2,12,2Zm0,18c-4.41,0-8-3.59-8-8S7.59,4,12,4s8,3.59,8,8-3.59,8-8,8Z"></path><path d="M12 10.5A1.5 1.5 0 1 0 12 13.5 1.5 1.5 0 1 0 12 10.5z"></path><path d="M16.5 10.5A1.5 1.5 0 1 0 16.5 13.5 1.5 1.5 0 1 0 16.5 10.5z"></path><path d="M7.5 10.5A1.5 1.5 0 1 0 7.5 13.5 1.5 1.5 0 1 0 7.5 10.5z"></path>
-        </svg>
-    </button>
+    <Button bind:value={showFilters} color="bg-gray-500">
+        {#snippet icon()}
+            <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
+                fill="#ffffff" viewBox="0 0 24 24" >
+                <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                <path d="m12,2C6.49,2,2,6.49,2,12s4.49,10,10,10,10-4.49,10-10S17.51,2,12,2Zm0,18c-4.41,0-8-3.59-8-8S7.59,4,12,4s8,3.59,8,8-3.59,8-8,8Z"></path><path d="M12 10.5A1.5 1.5 0 1 0 12 13.5 1.5 1.5 0 1 0 12 10.5z"></path><path d="M16.5 10.5A1.5 1.5 0 1 0 16.5 13.5 1.5 1.5 0 1 0 16.5 10.5z"></path><path d="M7.5 10.5A1.5 1.5 0 1 0 7.5 13.5 1.5 1.5 0 1 0 7.5 10.5z"></path>
+            </svg>
+        {/snippet}
+    </Button>
 </div>
 
 <Modal bind:active={showFilters}>
@@ -119,25 +112,15 @@
 
 <!-- Botón de información -->
 <div class="absolute top-4 right-4 pointer-events-auto">
-    <button
-        class="flex place-items-center place-content-center rounded-full bg-cyan-500 shadow-md w-16 h-16 text-4xl cursor-pointer"
-        onclick={toggleAbout}
-        aria-label="Acerca del proyecto"
-    >
-        <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
-            fill="#ffffff" viewBox="0 0 24 24" >
-            <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
-            <path d="M11 11h2v6h-2zM11 7h2v2h-2z"></path><path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path>
-        </svg>
-    </button>
+    <Button bind:value={showAbout}>
+        {#snippet icon()}
+            <svg  xmlns="http://www.w3.org/2000/svg" width="36" height="36"  
+                fill="#ffffff" viewBox="0 0 24 24" >
+                <path d="M11 11h2v6h-2zM11 7h2v2h-2z"></path><path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path>
+            </svg>
+        {/snippet}
+    </Button>
 </div>
-
-{#if Capacitor.getPlatform() === 'web'}
-    <!-- Botón de descarga del app (si es web) -->
-    <div class="absolute top-24 right-4 pointer-events-auto">
-        <DownloadButton />
-    </div>
-{/if}
 
 <!-- Modal de información -->
 <Modal bind:active={showAbout}>
@@ -162,3 +145,10 @@
         OIM. (2023). Mapa de servicios para personas refugiadas y migrantes en Tijuana. <a href="https://help.unhcr.org/wp-content/uploads/sites/22/pdf/MapaTijuana.pdf" class="text-blue-600 underline" target="_blank">Ver PDF</a>
     {/snippet}
 </Modal>
+
+{#if Capacitor.getPlatform() === 'web'}
+    <!-- Botón de descarga del app (si es web) -->
+    <div class="absolute top-24 right-4 pointer-events-auto">
+        <DownloadButton />
+    </div>
+{/if}
